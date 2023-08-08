@@ -2,8 +2,8 @@ import LinkContainer from "./components/LinkContainer";
 import Settings from "./components/Settings";
 import WidgetBar from "./components/WidgetsBar";
 
-import jsonDataWidgets from "./data/widgetData";
-import jsonData from "./data/linkData";
+import jsonDataWidgets from "./data/widgetData.json";
+import jsonData from "./data/linkData.json";
 
 export default function Home() {
   return (
