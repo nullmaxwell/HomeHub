@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    image: homehub:latest
+    ports:
+      - ${UI_PORT}:3000
+    restart: always
