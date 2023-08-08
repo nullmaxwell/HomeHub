@@ -37,6 +37,7 @@ The following are the configurable environment variables:
 
 ```txt
 UI_PORT=3535 # Port on which to deploy the application.
+HUB_PAGE_TITLE='Drink more water!' # Main title of the static page.
 ```
 
 ## Usage/Deployment instructions
