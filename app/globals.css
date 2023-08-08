@@ -2,26 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.demo-wrap::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: var(--grain-opacity, 0.5);
+  background-image: url('../public/noise-light.png');
+  z-index: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* The modal container */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* The modal content */
+.modal-content {
+  position: absolute;
+  top: 112px;
+  right: -80px;
+  border-radius: 10px;
+  background-color: #424242;
+  border: 1px #6b6b6b solid;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  opacity: 99%;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* The close button */
+.close-button {
+  position: absolute;
+  top: -3px;
+  right: 9px;
+  font-size: 25px;
+  cursor: pointer;
+  color: white;
 }
