@@ -15,7 +15,7 @@ export default function LinkBox({items}: any) {
                         <span className="absolute bottom-0 right-0 w-4 h-full bg-gradient-to-l from-white to-transparent opacity-5"></span>
                         <span className="absolute inset-0 w-full h-full border border-white rounded-md opacity-10"></span>
                         <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-5"></span>
-                        <span className="relative text-left"><i className={`pr-2  ${item.icon_class}`} style={{color: item.icon_style}}></i>{item.name}</span>
+                        <span className="relative text-left"><i className={`pr-2 ${item.icon_class}`} style={{color: item.icon_style}}></i>{item.name}</span>
                     </a>
                 </div>
             ))}

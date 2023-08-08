@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function Clock() {
 
-    const [time, setTime] = useState<Date>();
+    const [time, setTime] = useState<Date>(new Date());
     const [isUTC, setIsUTC] = useState(false);
 
     useEffect(() => {
@@ -38,9 +38,7 @@ export default function Clock() {
     };
 
 
-    const formattedTime = time
-        ? (isUTC ? UTCtime(time) : LocalTime(time))
-        : "Loading...";
+    const formattedTime = isUTC ? UTCtime(time) : LocalTime(time);
     return (
         <>
             <div className="snap-center relative inline-flex items-center justify-start px-6 py-3 font-bold text-white rounded-md shadow-2xl group w-full max-w-full select-none" onClick={toggleTimezone} style={{ backgroundColor: '#00000033' }}>
