@@ -16,7 +16,7 @@ export default function RootLayout({
       <head>
         <script src="https://kit.fontawesome.com/28e81a920b.js"></script>
       </head>
-      <body>{children}</body>
+      <body className=''>{children}</body>
     </html>
   )
 }
