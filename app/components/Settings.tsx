@@ -8,7 +8,7 @@ import setBodyStyle from '../hooks/setBodyStyle';
 export default function Settings() {
     const [open, setOpen] = useState<boolean>(false);
     const [currentClassIndex, setCurrentClassIndex] = useState<Number>(0);
-
+    const [noiseValue, setNoiseValue] = useState<Number>(0);
 
     useEffect(() => {
         // Retrieve the previous selection from local storage
@@ -16,13 +16,48 @@ export default function Settings() {
         if (storedIndex !== null) {
             setCurrentClassIndex(parseInt(storedIndex, 10));
         }
-    })
+
+        const storedNoise = localStorage.getItem('noise');
+        if (storedNoise !== null) {
+            setNoiseValue(parseInt(storedNoise, 10))
+
+            const parsed = parseInt(storedNoise, 10) / 100;
+
+            const noiseDiv = document.getElementById('grain-slider');
+            if (noiseDiv) {
+                noiseDiv.style.setProperty('--grain-opacity', parsed.toString());
+            } else {
+                console.warn('Element with ID "grain-slider" not found.');
+            }
+        }
+    });
+
 
     function handleDropdownChange(e: any) {
         const newIndex = parseInt(e.target.value);
         localStorage.setItem('selectedClassIndex', newIndex.toString())
         setBodyStyle()
         setCurrentClassIndex(newIndex)
+    }
+
+    function handleNoise(e: any) {
+        const newNoiseValue = parseInt(e.target.value);
+
+        if (isNaN(newNoiseValue)) {
+            console.error('Invalid noise value:', e.target.value);
+            return;
+        }
+
+        localStorage.setItem('noise', newNoiseValue.toString());
+
+        const parsed = newNoiseValue / 100;
+        const noiseDiv = document.getElementById('grain-slider');
+
+        if (noiseDiv) {
+            noiseDiv.style.setProperty('--grain-opacity', parsed.toString());
+        } else {
+            console.warn('Element with ID "grain-slider" not found.');
+        }
     }
 
     const Modal = () => (
@@ -33,7 +68,15 @@ export default function Settings() {
                     <button className="close-button z-40" id="closeButton" onClick={() => setOpen(false)}>&times;</button>
                     <div className="slider-container z-20 relative">
                         <p className="text-sm font-bold py-1 text-white">Noise:</p>
-                        <input type="range" id="opacitySlider" min="0" max="100" defaultValue="50" className="w-full" />
+                        <input
+                            type="range"
+                            id="opacitySlider"
+                            min="0"
+                            max="100"
+                            defaultValue={noiseValue.toString()}
+                            className="w-full"
+                            onChange={handleNoise}
+                        />
                     </div>
                     <div id="dropdownContainer" className="my-4 z-20 relative">
                         <p className="text-sm font-bold py-1 text-white">Theme:</p>
