@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function Clock() {
 
-    const [time, setTime] = useState<Date>(new Date());
+    const [time, setTime] = useState<Date>();
     const [isUTC, setIsUTC] = useState(false);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export default function Clock() {
     };
 
 
-    const formattedTime = isUTC ? UTCtime(time) : LocalTime(time);
+    const formattedTime = time ? (isUTC ? UTCtime(time) : LocalTime(time)) : 'Server delay...';
     return (
         <>
             <div className="snap-center relative inline-flex items-center justify-start px-6 py-3 font-bold text-white rounded-md shadow-2xl group w-full max-w-full select-none" onClick={toggleTimezone} style={{ backgroundColor: '#00000033' }}>
@@ -56,7 +56,7 @@ export default function Clock() {
                     className="rounded-md absolute bottom-0 right-0 w-4 h-full bg-gradient-to-l from-white to-transparent opacity-5"></span>
                 <span className="absolute inset-0 w-full h-full border border-white rounded-md opacity-10"></span>
                 <div className="flex flex-col">
-                    <span className="relative text-left font-light text-sm whitespace-nowrap">Timezone: {isUTC ? "UTC" : "Local"}</span>
+                    <span className="relative text-left font-light text-sm whitespace-nowrap">{isUTC ? "UTC" : "Local"} Time</span>
                     <span id="timeText" className="relative text-left font-mono whitespace-nowrap">{formattedTime}</span>
                 </div>
             </div>

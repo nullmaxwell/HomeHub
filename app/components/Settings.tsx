@@ -4,11 +4,12 @@ import classListArray from '../data/themes'
 import { BsGearFill } from 'react-icons/bs'
 import { useEffect, useState } from 'react'
 import setBodyStyle from '../hooks/setBodyStyle';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Settings() {
     const [open, setOpen] = useState<boolean>(false);
-    const [currentClassIndex, setCurrentClassIndex] = useState<Number>(0);
-    const [noiseValue, setNoiseValue] = useState<Number>(0);
+    const [currentClassIndex, setCurrentClassIndex] = useState<number>(0);
+    const [noiseValue, setNoiseValue] = useState<number>(0);
 
     useEffect(() => {
         // Retrieve the previous selection from local storage
@@ -61,43 +62,48 @@ export default function Settings() {
     }
 
     const Modal = () => (
-        <>
-            {/* <!-- The modal --> */}
-            <div id="modal" className="fixed top-4 right-4 w-52 h-auto z-20 bg-slate-700 rounded-lg shadow-md">
-                <div className="p-4">
-                    <button className="close-button z-40" id="closeButton" onClick={() => setOpen(false)}>&times;</button>
-                    <div className="slider-container z-20 relative">
-                        <p className="text-sm font-bold py-1 text-white">Noise:</p>
-                        <input
-                            type="range"
-                            id="opacitySlider"
-                            min="0"
-                            max="100"
-                            defaultValue={noiseValue.toString()}
-                            className="w-full"
-                            onChange={handleNoise}
-                        />
-                    </div>
-                    <div id="dropdownContainer" className="my-4 z-20 relative">
-                        <p className="text-sm font-bold py-1 text-white">Theme:</p>
-                        <select id="gradientDropdown"
-                            className="border rounded bg-white dark:bg-gray-800 text-black dark:text-white px-2 py-1 w-full"
-                            onChange={handleDropdownChange}
-                            value={currentClassIndex.toString()}>
-                            {classListArray.map((theme, index) => (
-                                <option key={index} value={index}>{theme.name}</option>
-                            ))}
-                        </select>
-                    </div>
+        <motion.div id="modal" className="fixed top-7 right-4 w-52 h-auto z-20 bg-slate-800 border border-slate-600 rounded-lg shadow-md"
+            key="modal"
+            initial={{ x: 400 }}
+            animate={{ x: 0 }}
+            exit={{ x: 400 }}
+            transition={{ type: "spring", damping: 15 }}>
+            <div className="p-4">
+                <button className="close-button z-40" id="closeButton" onClick={() => setOpen(false)}>&times;</button>
+                <div className="slider-container z-20 relative">
+                    <p className="text-sm font-bold py-1 text-white">Noise:</p>
+                    <input
+                        type="range"
+                        id="opacitySlider"
+                        min="0"
+                        max="100"
+                        defaultValue={noiseValue}
+                        className="w-full"
+                        onChange={handleNoise}
+                    />
+                </div>
+                <div id="dropdownContainer" className="my-4 z-20 relative">
+                    <p className="text-sm font-bold py-1 text-white">Theme:</p>
+                    <select id="gradientDropdown"
+                        className="border rounded bg-white dark:bg-gray-800 text-black dark:text-white px-2 py-1 w-full"
+                        onChange={handleDropdownChange}
+                        value={currentClassIndex}>
+                        {classListArray.map((theme, index) => (
+                            <option key={index} value={index}>{theme.name}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
-        </>
+        </motion.div>
     )
     return (
         <>
             <button id="showModalButton" className="z-20 absolute top-5 right-5 text-xl md:text-3xl hover:scale-105 text-neutral-200" onClick={() => open ? setOpen(false) : setOpen(true)}><BsGearFill /></button>
-
-            {open && <Modal />}
+            <AnimatePresence>
+                {open &&
+                    <Modal />
+                }
+            </AnimatePresence>
         </>
     )
 }
