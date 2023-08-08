@@ -15,7 +15,7 @@ export default function RootLayout({
   })
 
   return (
-    <html lang="en">
+    <html lang="en" className='dark'>
       <head>
         <script src="https://kit.fontawesome.com/28e81a920b.js"></script>
       </head>
