@@ -7,7 +7,7 @@ import setBodyStyle from '../hooks/setBodyStyle';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Settings() {
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>();
     const [currentClassIndex, setCurrentClassIndex] = useState<number>(0);
     const [noiseValue, setNoiseValue] = useState<number>(0);
 
@@ -67,9 +67,9 @@ export default function Settings() {
             initial={{ x: 400 }}
             animate={{ x: 0 }}
             exit={{ x: 400 }}
-            transition={{ type: "spring", damping: 15 }}>
+            transition={{ duration: 0.1 }}>
             <div className="p-4">
-                <button className="close-button z-40" id="closeButton" onClick={() => setOpen(false)}>&times;</button>
+                <button className="close-button z-40" id="closeButton" onClick={() => open && setOpen(false)}>&times;</button>
                 <div className="slider-container z-20 relative">
                     <p className="text-sm font-bold py-1 text-white">Noise:</p>
                     <input
