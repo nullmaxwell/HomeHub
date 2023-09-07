@@ -71,7 +71,7 @@ export default function Settings() {
     }
 
     const Modal = () => (
-        <motion.div id="modal" className="fixed top-7 right-4 w-fit h-auto z-20 bg-slate-800 border border-slate-600 rounded-lg shadow-md"
+        <motion.div id="modal" className="fixed top-7 right-4 w-fit h-auto z-20 bg-neutral-800 border border-neutral-600 rounded-lg shadow-md"
             key="modal"
             initial={{ x: 400 }}
             animate={{ x: 0 }}
@@ -96,7 +96,7 @@ export default function Settings() {
                 <div id="dropdownContainer" className="my-4 z-20 relative">
                     <p className="text-sm font-bold py-1 text-white">Theme:</p>
                     <select id="gradientDropdown"
-                        className="border rounded bg-white dark:bg-gray-800 text-black dark:text-white px-2 py-1 w-full"
+                        className="border rounded bg-white dark:bg-neutral-700 text-black dark:text-white px-2 py-1 w-full"
                         onChange={handleDropdownChange}
                         value={currentClassIndex}>
                         {classListArray.map((theme, index) => (
