@@ -3,6 +3,7 @@ import './globals.css'
 import { useEffect } from 'react';
 import setBodyStyle from './hooks/setBodyStyle';
 import { AnimatePresence, motion } from 'framer-motion';
+import setInitStyle from './hooks/setInitStyle';
 
 export default function RootLayout({
   children,
@@ -11,7 +12,7 @@ export default function RootLayout({
 }) {
 
   useEffect(() => {
-    setBodyStyle()
+    setInitStyle()
   })
 
   return (
