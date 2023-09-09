@@ -41,7 +41,7 @@ export default function Clock() {
     const formattedTime = time ? (isUTC ? UTCtime(time) : LocalTime(time)) : 'Server delay...';
     return (
         <>
-            <div className="snap-center relative inline-flex items-center justify-start px-6 py-3 font-bold text-white rounded-md shadow-2xl group w-full max-w-full select-none" onClick={toggleTimezone} style={{ backgroundColor: '#00000033' }}>
+            <div className="snap-center relative inline-flex items-center justify-start px-6 py-3 font-bold text-white rounded-md shadow-2xl group w-full max-w-full select-none cursor-pointer" onClick={toggleTimezone} style={{ backgroundColor: '#00000033' }}>
                 {/* <!-- Top glass gradient --> */}
                 <span
                     className="rounded-md absolute top-0 left-0 w-full bg-gradient-to-b from-white to-transparent opacity-5 h-1/3"></span>
