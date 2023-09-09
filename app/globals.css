@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  user-select: none;
+}
+
 .demo-wrap::before {
   content: ' ';
   display: block;
@@ -9,9 +13,10 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   opacity: var(--grain-opacity, 0.5);
   background-image: url('../public/noise-light.png');
+  object-fit: fill;
   z-index: 1;
 }
 
@@ -48,4 +53,20 @@
   font-size: 25px;
   cursor: pointer;
   color: white;
+}
+
+@media (max-width: 640px) {
+  .demo-wrap::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: var(--grain-opacity, 0.5);
+    background-image: url('../public/noise-light.png');
+    object-fit: fill;
+    z-index: 1;
+  }
 }
